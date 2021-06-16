@@ -27,3 +27,4 @@ React
 2.run yarn
 3.run yarn start
 4.open http://localhost:3000 (make sure rails is on port 3001)
+
