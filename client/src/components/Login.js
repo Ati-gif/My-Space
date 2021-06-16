@@ -1,32 +1,63 @@
-import React, {useContext, useState} from 'react'
-import { Form } from 'semantic-ui-react'
-import { useFormInput } from '../customHooks/useFormInput'
-import {AuthContext} from '../providers/AuthProvider'
-import {useHistory} from 'react-router-dom'
+import React from 'react';
+import { AuthConsumer, } from "../providers/AuthProvider";
+import { Button, Form, Segment, Header, } from 'semantic-ui-react';
 
-const Login = (props) => {
-    const history = useHistory()
-    const {handleLogin} = useContext(AuthContext)
-    const  email = useFormInput('test1@test.com', 'Email')
-    const  password = useFormInput('123456', 'Password')
+class Login extends React.Component {
+  state = { email: 'Random12@gmail.com', password: '12345678' }
+  
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { email, password, } = this.state;
+    this.props.auth.handleLogin({ email, password, }, this.props.history);
+  }
+  
+  handleChange = (e) => {
+    const { name, value, } = e.target;
+    this.setState({ [name]: value, });
+  }
 
-    const handleSubmit = (e) =>{
-        console.log('here')
-        e.preventDefault()
-        // front end validation
-        handleLogin({email: email.value, password:password.value }, history)
-        
-    }
+  render() {
+    const { email, password, } = this.state;
+  
     return (
-        <>
-          <h1>Login form</h1>
-          <Form onSubmit={handleSubmit}>
-              <Form.Input {...email} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"  />
-              <Form.Input {...password} />
-              <Form.Button type='submit'>add</Form.Button>
-          </Form>
-        </>
+      <Segment basic>
+        <Header as='h1'color='blue' textAlign='center'>MySpace</Header>
+        <Header as='h1' textAlign='center'>Login</Header>
+        <Form onSubmit={this.handleSubmit}>
+          <Form.Input
+            label="Email"
+            autoFocus
+            required         
+            name='email'
+            value={email}
+            placeholder='Email'
+            onChange={this.handleChange}
+          />
+          <Form.Input
+            label="Password"
+            required
+            name='password'
+            value={password}
+            placeholder='Password'
+            type='password'
+            onChange={this.handleChange}
+          />
+          <Segment textAlign='center' basic>
+            <Button primary type='submit'>Submit</Button>
+          </Segment>
+        </Form>
+      </Segment>
     )
+  }
 }
 
-export default Login
+export default class ConnectedLogin extends React.Component {
+  render() {
+    return (
+      <AuthConsumer>
+        { auth => <Login {...this.props} auth={auth} />}
+      </AuthConsumer>
+    )
+  }
+}
+

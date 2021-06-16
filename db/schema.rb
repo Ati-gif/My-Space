@@ -15,6 +15,24 @@ ActiveRecord::Schema.define(version: 2021_06_16_155806) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "comicbooks", force: :cascade do |t|
+    t.string "name"
+    t.string "publisher"
+    t.string "genre"
+    t.float "price"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "ratings", force: :cascade do |t|
+    t.text "body"
+    t.integer "rating"
+    t.bigint "comicbook_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comicbook_id"], name: "index_ratings_on_comicbook_id"
+  end
+
   create_table "things", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -51,4 +69,5 @@ ActiveRecord::Schema.define(version: 2021_06_16_155806) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "ratings", "comicbooks"
 end
