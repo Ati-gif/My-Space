@@ -49,7 +49,7 @@ class Home extends React.Component {
           </Header>
           <br />
           <Card key={person.id} >
-            <Image src={person.avatar} size="50x50" />
+            <Image src={person.avatar} wrapped ui={false} size="medium" />
             <Card.Content>
               <Card.Header>{person.name}</Card.Header>
             </Card.Content>

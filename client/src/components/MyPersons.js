@@ -26,7 +26,7 @@ class MyPersons extends React.Component {
         <Card.Group itemsPerRow={4} >
           {persons.map((person) => (
             <Card key={person.id} >
-              <Image src={person.avatar} size="50x50" />
+              <Image src='https://react.semantic-ui.com/images/avatar/large/molly.png' wrapped ui={false} size="small" />
               <Card.Content >
                 <Divider />
                 <Card.Header>{person.name}</Card.Header>
