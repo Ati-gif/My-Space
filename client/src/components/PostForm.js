@@ -27,12 +27,6 @@ export default function PostForm(props) {
           label={"type here:"}
           onChange={(e) => setPost(e.target.value)}
         />
-        <Button color="" icon basic onClick={() => this.dislike(post.id)}>
-          <Icon name="x" />
-        </Button>
-        <Button color="pink" icon basic onClick={() => this.like(post.id)}>
-          <Icon name="like" />
-        </Button>
         <Form.Button color="teal">Submit</Form.Button>
       </Form>
     );
