@@ -40,10 +40,9 @@ export default function PostForm(props) {
     return (
       <Button
         onClick={() => setShowForm(true)}
-        basic
-        color="teal"
-        content="Teal"
-      >
+       
+        color="violet"
+        >
         Show Form
       </Button>
     );
