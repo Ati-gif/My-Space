@@ -5,31 +5,26 @@
 ## Steps to clone
 
 1. git clone git@github.com:jimibue/starter_project_sum21.git <app_name_here>
-2. cd <app_name_here>
+2.remove origin
+3.cd into project
+4.git remote rm origin
+5.create a new repo and add new origin
+6.git add remote origin
 
-### rails steps
-**NOTE this uses 2.7.2 which you don't have probably run a-d**
-**rm need to be done in root of rails project
-- remove the  .ruby-version file `rm -r .ruby-version `
-- remove the  Gemfile.lock `rm -r Gemfile.lock `
-- in line 4 of Gemfile delete this line `ruby '2.7.2'`
-- proceed with steps below
+Rails
 
-1. bundle
-2. rename database, in database.yml find and replace `change_db_name_here` to <app_name_here>
-3. rails db:create db:migrate db:seed
-4. rails s -p 3001
+1.cd ProjectName
+2.run bundle
+3.in config/database yml replace database name to something else
+4.in this case that would be starter_setup_...
+5.rails db:create db:migrate db:seed
+6.rails s -p 3001
+7.check this route http://localhost:3001
 
-### react steps (in a separate terminal pane)
-1. cd client  
-2. yarn
-3. yarn start
+React
 
-goto localhost:3000 to see react app
-goto localhost:3001 to see rails app
-
-### github steps
-1. remove remote `git remote remove origin`
-2. create new repo on github
-3. add remote `git remote add <ssh_link_here>`
+1.cd ProjectName/client
+2.run yarn
+3.run yarn start
+4.open http://localhost:3000 (make sure rails is on port 3001)
 
