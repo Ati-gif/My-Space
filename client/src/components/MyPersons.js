@@ -1,18 +1,18 @@
 import React from "react";
 import axios from "axios";
-import { Card, Divider, Image, Header } from "semantic-ui-react";
-
+import { Card, Divider, Image, Header, Button } from "semantic-ui-react";
 class MyPersons extends React.Component {
   state = { persons: [] };
 
-  componentDidMount() {
+   componentDidMount() {
     axios
       .get("/api/my_persons")
       .then((res) => this.setState({ persons: res.data }));
   }
+  
 
   render() {
-    const { persons } = this.state;
+    const { persons, destroy, editClicked, id } = this.state;
     return (
       <div>
         <br />
@@ -31,9 +31,23 @@ class MyPersons extends React.Component {
                 <Divider />
                 <Card.Header>{person.name}</Card.Header>
               </Card.Content>
-            </Card>
-          ))}
-        </Card.Group>
+             <Button onClick={() => destroy(id)} button basic color="red" content="red"
+             >
+        Delete
+      </Button>
+      
+      <Button
+        onClick={() => editClicked(id)}
+        button
+        basic
+        color="green"
+        content="green"
+      >
+        Edit
+      </Button>
+      </Card>
+      ))}
+          </Card.Group>
       </div>
     );
   }

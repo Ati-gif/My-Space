@@ -15,3 +15,7 @@ class Api::PersonsController < ApplicationController
     render json: User.liked(current_user.liked_persons)
 end
 end
+
+def destroy
+  render json: @current_user.destroy
+end
