@@ -27,7 +27,6 @@ class Api::PostsController < ApplicationController
     end
   end
 
-
   def destroy
     render json: @post.destroy
   end

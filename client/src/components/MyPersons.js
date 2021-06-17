@@ -33,7 +33,7 @@ class MyPersons extends React.Component {
               </Card.Content>
              <Button onClick={() => destroy(id)} button basic color="red" content="red"
              >
-        Delete
+        Unfriend
       </Button>
       
       <Button
