@@ -8,8 +8,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  
-
 serialize :liked_persons, Array
 
 has_many :posts

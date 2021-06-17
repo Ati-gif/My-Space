@@ -1,62 +1,50 @@
-import React from 'react';
-import { AuthConsumer, } from "../providers/AuthProvider";
-import { Button, Form, Segment, Header, } from 'semantic-ui-react';
+import React from 'react'
+import axios from 'axios'
+import { AuthConsumer } from '../providers/AuthProvider'
 
-class Login extends React.Component {
-  state = { email: 'Random12@gmail.com', password: '12345678' }
-  
-  handleSubmit = (e) => {
-    e.preventDefault();
-    const { email, password, } = this.state;
-    this.props.auth.handleLogin({ email, password, }, this.props.history);
+class FetchUser extends React.Component {
+  state = { loaded: false } 
+
+  componentDidMount() {
+    const { auth: { authenticated, setUser }, } = this.props
+
+    if (authenticated) {
+      this.loaded()
+    } else {
+      if (this.checkLocalToken()) {
+        axios.get('/api/auth/validate_token')
+        .then((res) => {
+          setUser(res.data.data)
+          this.loaded()
+        })
+        .catch((res) => {
+          this.loaded()
+        })
+      } else {
+          this.loaded()
+      }
+    }
   }
-  
-  handleChange = (e) => {
-    const { name, value, } = e.target;
-    this.setState({ [name]: value, });
+
+  checkLocalToken = () => {
+    const token = localStorage.getItem('access-token')
+    return token
   }
+
+  loaded = () => this.setState({ loaded: true })
 
   render() {
-    const { email, password, } = this.state;
-  
-    return (
-      <Segment basic>
-        <Header as='h1'color='blue' textAlign='center'>MySpace</Header>
-        <Header as='h1' textAlign='center'>Login</Header>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Input
-            label="Email"
-            autoFocus
-            required         
-            name='email'
-            value={email}
-            placeholder='Email'
-            onChange={this.handleChange}
-          />
-          <Form.Input
-            label="Password"
-            required
-            name='password'
-            value={password}
-            placeholder='Password'
-            type='password'
-            onChange={this.handleChange}
-          />
-          <Segment textAlign='center' basic>
-            <Button primary type='submit'>Submit</Button>
-          </Segment>
-        </Form>
-      </Segment>
-    )
+    return this.state.loaded ? this.props.children : null
   }
 }
 
-export default class ConnectedLogin extends React.Component {
-  render() {
-    return (
-      <AuthConsumer>
-        { auth => <Login {...this.props} auth={auth} />}
-      </AuthConsumer>
-    )
-  }
-}
+const ConnectedFetchUser = (props) => (
+  <AuthConsumer>
+    { auth => 
+      <FetchUser { ...props } auth={auth} />
+    }
+  </AuthConsumer>
+)
+
+export default ConnectedFetchUser;
+
