@@ -48,7 +48,7 @@ class Home extends React.Component {
             MySpace
           </Header>
           <br />
-          <Card key={person.id}>
+          <Card key={person.id} >
             <Image src={person.avatar} size="50x50" />
             <Card.Content>
               <Card.Header>{person.name}</Card.Header>
@@ -73,7 +73,9 @@ class Home extends React.Component {
               <Button basic color="blue" onClick>
                 Posts <p></p>
                 <PostForm />
+                
               </Button>
+              
             </Card.Content>
           </Card>
           <Link to="/my_persons">

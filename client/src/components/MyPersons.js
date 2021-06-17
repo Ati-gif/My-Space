@@ -23,11 +23,11 @@ class MyPersons extends React.Component {
           Friends
         </Header>
         <br />
-        <Card.Group itemsPerRow={4}>
+        <Card.Group itemsPerRow={4} >
           {persons.map((person) => (
-            <Card key={person.id}>
+            <Card key={person.id} >
               <Image src={person.avatar} size="50x50" />
-              <Card.Content>
+              <Card.Content >
                 <Divider />
                 <Card.Header>{person.name}</Card.Header>
               </Card.Content>

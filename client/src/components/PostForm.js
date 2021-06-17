@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, Icon } from "semantic-ui-react";
 import axios from "axios";
 
 export default function PostForm(props) {
-  const [showForm, setShowForm] = useState(false);
+  const [showForm, setShowForm] = useState(false);  
   const [post, setPost] = useState(props.post ? props.post : "");
 
-  async function display(e) {
+    async function display(e) {
     console.log("clicked");
     const data = { post: post };
     if (props.id) {
@@ -16,8 +16,8 @@ export default function PostForm(props) {
       let res = await axios.post(`/api/posts`, data); // create method 'look in localhost:routes'
       props.add(res.data);
     }
-  }
-
+  };
+  
   if (showForm) {
     console.log(showForm);
     return (
@@ -27,10 +27,16 @@ export default function PostForm(props) {
           label={"type here:"}
           onChange={(e) => setPost(e.target.value)}
         />
+        <Button color="" icon basic onClick={() => this.dislike(post.id)}>
+          <Icon name="x" />
+        </Button>
+        <Button color="pink" icon basic onClick={() => this.like(post.id)}>
+          <Icon name="like" />
+        </Button>
         <Form.Button color="teal">Submit</Form.Button>
       </Form>
     );
-  } else {
+    } else {
     return (
       <Button
         onClick={() => setShowForm(true)}
