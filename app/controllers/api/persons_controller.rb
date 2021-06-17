@@ -1,4 +1,5 @@
 class Api::PersonsController < ApplicationController
+  
   before_action :authenticate_user!
 
   def index
