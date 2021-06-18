@@ -8,7 +8,7 @@
 
 25.times do
   name = Faker::Name.name   
-  avatar = Faker::Avatar.image(slug: name, size: '50x50', format: 'png', set: 'set1')
+  avatar = Faker::Avatar.image( size: '100x100', format: 'png', set: 'set5')
   Person.create(name: name, avatar: avatar)
 end
 
