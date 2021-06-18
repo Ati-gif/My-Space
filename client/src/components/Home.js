@@ -71,8 +71,14 @@ class Home extends React.Component {
                 <Icon name="thumbs up" />
               </Button>
               <Button basic color="blue" onClick>
-                Posts <p></p>
-                <PostForm />
+              <p>
+
+                </p>
+                <Card.Meta> Post: Summer 2021! </Card.Meta>
+                <p></p>
+                <p>
+                <Card.Meta> New Post:  <PostForm /> </Card.Meta>
+                </p>
               </Button>
             </Card.Content>
           </Card>

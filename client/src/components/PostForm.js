@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, Button, Icon } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 import axios from "axios";
 
 export default function PostForm(props) {
@@ -27,6 +27,7 @@ export default function PostForm(props) {
           label={"type here:"}
           onChange={(e) => setPost(e.target.value)}
         />
+        
         <Form.Button color="teal">Submit</Form.Button>
       </Form>
     );
